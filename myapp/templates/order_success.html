@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | TrendStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #ffffff; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .success-card {
+            text-align: center;
+            max-width: 450px;
+            padding: 40px;
+        }
+
+        .check-icon {
+            font-size: 60px;
+            color: #ff758c;
+            margin-bottom: 20px;
+            animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        h1 { font-weight: 800; font-size: 32px; margin-bottom: 10px; }
+        p { color: #888; line-height: 1.6; margin-bottom: 30px; }
+
+        .continue-btn {
+            display: inline-block;
+            background: #1a1a1a;
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            background: #ff758c;
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 117, 140, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-card">
+        <i class="fas fa-check-circle check-icon"></i>
+        <h1>It's Official!</h1>
+        <p>Your order has been placed successfully. We're getting your TrendStore picks ready for delivery!</p>
+        
+        <a href="{% url 'index' %}" class="continue-btn">Shop More Trends</a>
+    </div>
+</body>
+</html>

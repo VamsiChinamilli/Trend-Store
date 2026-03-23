@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | TrendStore</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fcf8f8; /* Soft Cream/Blush Background */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+        }
+
+        .signup-container {
+            display: flex;
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.05);
+            max-width: 1000px;
+            width: 90%;
+            height: 620px;
+        }
+
+        /* ROSE-GOLD & CREAM SIDE (Replaces the Violet) */
+        .visual-side {
+            flex: 1.2;
+            /* Gradient using Rose-Gold (#ffafbd) and soft Cream */
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%); 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .logo-huge {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo-huge span { color: #1a1a1a; }
+
+        .tagline {
+            font-weight: 600;
+            opacity: 0.9;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        /* FORM SIDE (The Fade-to-Right Animation) */
+        .form-side {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+            animation: fadeRight 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeRight {
+            0% { opacity: 0; transform: translateX(-30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        h2 { font-weight: 800; font-size: 28px; margin-bottom: 5px; color: #1a1a1a; }
+        .subtitle { color: #888; margin-bottom: 30px; font-size: 14px; }
+
+        label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 2px solid #f8f8f8;
+            border-radius: 15px;
+            background: #fafafa;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus { 
+            border-color: #ffafbd; 
+            background: #fff; 
+            box-shadow: 0 8px 20px rgba(255, 175, 189, 0.15);
+        }
+
+        .btn {
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        .btn:hover { 
+            background: #ff758c; /* Trendy Rose-Gold/Pink hover */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 117, 140, 0.2);
+        }
+        
+        .footer-text {
+            margin-top: 25px;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .footer-text a {
+            color: #ff758c;
+            text-decoration: none;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <div class="visual-side">
+            <div class="logo-huge">TREND<span>STORE</span></div>
+            <p class="tagline">Join the Collection</p>
+            <div style="width: 40px; height: 2px; background: white; margin-top: 20px; opacity: 0.5;"></div>
+        </div>
+
+        <div class="form-side">
+            <h2>Create Account</h2>
+            <p class="subtitle">Join thousands of trendsetters today.</p>
+
+            {% if messages %}
+                {% for msg in messages %}
+                    <p style="color: #ff758c; font-size: 12px; font-weight: 600; background: #fff5f5; padding: 10px; border-radius: 10px;">{{ msg }}</p>
+                {% endfor %}
+            {% endif %}
+            
+<form action="{% url 'signup' %}" method="POST">
+    {% csrf_token %}
+    
+    <label>Email Address</label>
+    <input type="email" name="email" placeholder="name@example.com" required>
+
+    <label>Password</label>
+    <input type="password" name="password" placeholder="••••••••" required>
+
+    <label>Confirm Password</label>
+    <input type="password" name="confirmPassword" placeholder="••••••••" required>
+
+    <button type="submit" class="btn">Start Shopping</button>
+</form>
+            
+            <p class="footer-text">
+                Already have an account? <a href="{% url 'login' %}">Login</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
