@@ -65,31 +65,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Mystore.wsgi.application'
 
 
-# Database - Neon PostgreSQL
-# Uses DATABASE_URL environment variable set in Vercel
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# Database Configuration - Neon PostgreSQL
+NEON_URL = "postgresql://neondb_owner:npg_P4JNWrAKn8ys@ep-bold-waterfall-anseuaqo-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
 
-# Print for debugging (check Vercel function logs)
-print(f"[DEBUG] DATABASE_URL exists: {DATABASE_URL is not None}")
-
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-            ssl_require=True,
-        )
-    }
-else:
-    # Fallback to SQLite for local development only
-    print("[DEBUG] No DATABASE_URL found, using SQLite")
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+DATABASES = {
+    'default': dj_database_url.parse(NEON_URL, conn_max_age=600)
+}
 
 
 # Password validation
@@ -131,3 +112,4 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = 'login'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
