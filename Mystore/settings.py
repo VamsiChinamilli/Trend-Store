@@ -64,13 +64,16 @@ WSGI_APPLICATION = 'Mystore.wsgi.application'
 # Database Configuration
 # Replace the string below with your REAL connection string from the Neon Dashboard
 # Example: "postgresql://alex:password@ep-cool-darkness-123.us-east-2.aws.neon.tech/neondb?sslmode=require"
-NEON_URL = "postgresql://neondb_owner:npg_P4JNWrAKn8ys@ep-bold-waterfall-anseuaqo-pooler.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+
+
+DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://neondb_owner:npg_P4JNWrAKn8ys@ep-bold-waterfall-anseuaqo-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require')
+
 DATABASES = {
-    'default': dj_database_url.parse(NEON_URL, conn_max_age=600)
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 }
-DATABASES['default']['OPTIONS'] = {
-    'sslmode': 'require',
-}
+DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
+
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
