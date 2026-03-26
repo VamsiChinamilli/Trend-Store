@@ -66,7 +66,7 @@ WSGI_APPLICATION = 'Mystore.wsgi.application'
 # Example: "postgresql://alex:password@ep-cool-darkness-123.us-east-2.aws.neon.tech/neondb?sslmode=require"
 
 
-DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://neondb_owner:npg_P4JNWrAKn8ys@ep-bold-waterfall-anseuaqo-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require')
+DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://neondb_owner:npg_TC6IzaF3smEB@ep-bold-waterfall-anseuaqo-pooler.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require')
 
 DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
