@@ -67,17 +67,23 @@ WSGI_APPLICATION = 'Mystore.wsgi.application'
 
 # Database - Neon PostgreSQL
 # Uses DATABASE_URL environment variable set in Vercel
-DATABASE_URL = os.environ.get('DATABASE_URL', '')
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+# Print for debugging (check Vercel function logs)
+print(f"[DEBUG] DATABASE_URL exists: {DATABASE_URL is not None}")
 
 if DATABASE_URL:
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
-    }
-    DATABASES['default']['OPTIONS'] = {
-        'sslmode': 'require',
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
+        )
     }
 else:
     # Fallback to SQLite for local development only
+    print("[DEBUG] No DATABASE_URL found, using SQLite")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
